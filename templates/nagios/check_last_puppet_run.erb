@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
 DIR='/var/lib/puppet'
 MAXDIFF=7200
 WARNDIFF=3600
@@ -24,7 +26,7 @@ then
 	exit 2
 fi
 
-LAST_RUN=$(grep last_run /var/lib/puppet/state/last_run_summary.yaml | awk '{ print $NF }')
+LAST_RUN=$(grep last_run ${DIR}/state/last_run_summary.yaml | awk '{ print $NF }')
 
 if [ -z "$LAST_RUN" ];
 then
@@ -38,7 +40,7 @@ DIFF_LAST_RUN=$(($NOW-$LAST_RUN))
 
 # PERFDATA="$PERFDATA difflastrun=$DIFF_LAST_RUN;"
 
-PERFDATA="$PERFDATA $(grep resources: /var/lib/puppet/state/last_run_summary.yaml -A7 | grep -v resources: | paste '-sd;')"
+PERFDATA="$PERFDATA $(grep resources: ${DIR}/state/last_run_summary.yaml -A7 | grep -v resources: | paste '-sd;')"
 
 if [ $DIFF_LAST_RUN -ge $MAXDIFF ];
 then
