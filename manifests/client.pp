@@ -37,15 +37,22 @@ class puppet::client(
 
 		package { 'puppet':
 			ensure  => $ensure,
-			require => Class['puppet::puppetlabsrepo'],
+			#require => Class['puppet::puppetlabsrepo'],
 			before  => Exec['mkdir_logpuppet'],
+		}
+
+		if($puppet::puppetlabsrepo::enable_puppetlabs_repo)
+		{
+			Package['puppet'] {
+				require => Class['puppet::puppetlabsrepo'],
+			}
 		}
 	}
 
 	file { $defaultsfile:
 		ensure  => present,
-		owner   => "root",
-		group   => "root",
+		owner   => 'root',
+		group   => 'root',
 		mode    => 0644,
 		require => Exec['mkdir_logpuppet'],
 		notify  => Service["puppet"],
@@ -85,7 +92,7 @@ class puppet::client(
 
 	if(defined(Class['logrotate']))
 	{
-		logrotate::logs { "puppet-client":
+		logrotate::logs { 'puppet-client':
 			log          => $log,
 			compress     => true,
 			copytruncate => true,
