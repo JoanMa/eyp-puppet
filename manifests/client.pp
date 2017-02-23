@@ -6,7 +6,7 @@ class puppet::client(
 											$showdiff              = true,
 											$ensure                = 'installed',
 											$daemon_status         = 'running',
-											$autorestart           = true,
+											$autorestart           = $puppet::params::client_autorestart_default,
 											$report                = true,
 											$srcdir                = '/usr/local/src',
 											$manage_package        = $puppet::params::manage_package_default,

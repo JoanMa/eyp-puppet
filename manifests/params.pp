@@ -33,6 +33,7 @@ class puppet::params {
 			$defaultsfile='/etc/sysconfig/puppet'
 			$defaultstemplate='sysconfig.erb'
 			$package_provider='rpm'
+			$client_autorestart_default = true
 
 			#TODO: versio rh
 			$puppet_master_packages=undef
@@ -56,9 +57,9 @@ class puppet::params {
 		}
 		'Debian':
 		{
-			$default_enable_puppetlabs_repo=true
 			$puppet_install_supported=true
 			$manage_package_default=true
+
 			case $::operatingsystem
 			{
 				'Ubuntu':
@@ -74,7 +75,15 @@ class puppet::params {
 					{
 						/^14.*$/:
 						{
+							$default_enable_puppetlabs_repo=true
 							$puppetlabs_repo='https://apt.puppetlabs.com/puppetlabs-release-trusty.deb'
+							$client_autorestart_default = true
+						}
+						/^16.*$/:
+						{
+							$default_enable_puppetlabs_repo=false
+							$puppetlabs_repo=undef
+							$client_autorestart_default = false
 						}
 						default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
 					}
