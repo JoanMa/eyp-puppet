@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.25
+
+* added service_enable varible to **puppet::client**
+
 ## 0.1.24
 
 * Ubuntu 16.04 support

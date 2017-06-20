@@ -6,6 +6,7 @@ class puppet::client(
 											$showdiff              = true,
 											$ensure                = 'installed',
 											$daemon_status         = 'running',
+											$service_enable        = true,
 											$autorestart           = $puppet::params::client_autorestart_default,
 											$report                = true,
 											$srcdir                = '/usr/local/src',
@@ -74,7 +75,7 @@ class puppet::client(
 	}
 
 	service { 'puppet':
-		enable  => true,
+		enable  => $service_enable,
 		ensure  => $daemon_status,
 		require => Class['puppet'],
 	}
