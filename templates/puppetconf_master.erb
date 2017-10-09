@@ -23,3 +23,19 @@
 <% else %>
   report = <%= @report %>
 <% end -%>
+
+<% if defined?(@vardir) -%>
+  vardir = <%= @vardir %>
+<% end -%>
+<% if defined?(@logdir) -%>
+  logdir = <%= @logdir %>
+<% end -%>
+<% if defined?(@rundir) -%>
+  rundir = <%= @rundir %>
+<% end -%>
+<% if defined?(@pidfile) -%>
+  pidfile = <%= @pidfile %>
+<% end -%>
+<% if defined?(@codedir) -%>
+  codedir = <%= @codedir %>
+<% end -%>

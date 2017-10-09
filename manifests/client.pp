@@ -67,7 +67,7 @@ class puppet::client(
 	}
 
 	concat::fragment{ 'puppetconf agent':
-		target  => '/etc/puppet/puppet.conf',
+		target  => $puppet::params::puppetconf,
 		order   => '01',
 		content => template("${module_name}/puppetconf_agent.erb"),
 		before  => Service['puppet'],
@@ -111,7 +111,7 @@ class puppet::client(
 			owner   => 'root',
 			group   => 'root',
 			mode    => '0755',
-			content => template("${module_name}/nagios/check_last_puppet_run.erb"),
+			content => file("${module_name}/nagios/check_last_puppet_run.sh"),
 		}
 	}
 

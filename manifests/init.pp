@@ -16,7 +16,7 @@ class puppet(
 		}
 	}
 
-  concat { '/etc/puppet/puppet.conf':
+  concat { $puppet::params::puppetconf:
   	ensure => 'present',
   	owner  => 'root',
   	group  => 'root',

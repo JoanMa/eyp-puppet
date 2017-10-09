@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.26
+
+* improved nagios check: **check_last_puppet_run** and moved to the files directory
+
 ## 0.1.25
 
 * added service_enable varible to **puppet::client**

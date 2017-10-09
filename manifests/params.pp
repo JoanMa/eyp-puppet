@@ -2,7 +2,6 @@ class puppet::params {
 
 	$puppetlabs_package='puppetlabs-release'
 
-
 	#TODO: SuSE
 	# zypper addrepo -f http://download.opensuse.org/repositories/systemsmanagement:/puppet/SLE_11_SP2/ puppet
 	# zypper install puppet
@@ -34,6 +33,13 @@ class puppet::params {
 			$defaultstemplate='sysconfig.erb'
 			$package_provider='rpm'
 			$client_autorestart_default = true
+
+			$puppetconf = '/etc/puppet/puppet.conf'
+			$vardir_default = undef
+			$logdir_default = undef
+			$rundir_default = undef
+			$pidfile_default = undef
+			$codedir_default = undef
 
 			#TODO: versio rh
 			$puppet_master_packages=undef
@@ -78,12 +84,26 @@ class puppet::params {
 							$default_enable_puppetlabs_repo=true
 							$puppetlabs_repo='https://apt.puppetlabs.com/puppetlabs-release-trusty.deb'
 							$client_autorestart_default = true
+
+							$puppetconf = '/etc/puppet/puppet.conf'
+							$vardir_default = undef
+							$logdir_default = undef
+							$rundir_default = undef
+							$pidfile_default = undef
+							$codedir_default = undef
 						}
 						/^16.*$/:
 						{
 							$default_enable_puppetlabs_repo=false
-							$puppetlabs_repo=undef
+							$puppetlabs_repo='https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb'
 							$client_autorestart_default = false
+
+							$puppetconf = '/etc/puppetlabs/puppet/puppet.conf'
+							$vardir_default = '/opt/puppetlabs/server/data/puppetserver'
+							$logdir_default = '/var/log/puppetlabs/puppetserver'
+							$rundir_default = '/var/run/puppetlabs/puppetserver'
+							$pidfile_default = '/var/run/puppetlabs/puppetserver/puppetserver.pid'
+							$codedir_default = '/etc/puppetlabs/code'
 						}
 						default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
 					}
