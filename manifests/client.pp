@@ -111,7 +111,7 @@ class puppet::client(
 			owner   => 'root',
 			group   => 'root',
 			mode    => '0755',
-			content => file("${module_name}/nagios/check_last_puppet_run.sh"),
+			content => file("${module_name}/check_last_puppet_run.sh"),
 		}
 	}
 
