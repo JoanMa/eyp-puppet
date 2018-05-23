@@ -43,21 +43,21 @@ class puppet::master(
   }
 
   case $::osfamily
-	{
-		'redhat':
-		{
+  {
+    'redhat':
+    {
       fail('TODO')
     }
     'Debian':
-		{
+    {
       case $::operatingsystem
       {
         'Ubuntu':
         {
           case $::operatingsystemrelease
-					{
-						/^14.*$/:
-						{
+          {
+            /^14.*$/:
+            {
               #require puppet::puppetlabsrepo
 
               file { '/etc/default/puppetmaster':
@@ -89,14 +89,15 @@ class puppet::master(
                 notify  => $serviceinstance,
               }
 
-              exec { "build CA $certname":
+              exec { "build CA ${certname}":
                 command => "puppet cert --generate ${certname}",
                 creates => "/var/lib/puppet/ssl/certs/${certname}.pem",
                 require => Package[$puppet::params::puppet_master_packages],
               }
 
               file { '/etc/apache2/sites-enabled/puppetmaster.conf':
-                ensure  => '/etc/apache2/sites-available/puppetmaster.conf',
+                ensure  => 'link',
+                target  => '/etc/apache2/sites-available/puppetmaster.conf',
                 require => File['/etc/apache2/sites-available/puppetmaster.conf'],
                 notify  => $serviceinstance,
               }
@@ -112,8 +113,8 @@ class puppet::master(
               if($manage_service)
               {
                 service { 'apache2':
-                  ensure => 'running',
-                  enable => true,
+                  ensure  => 'running',
+                  enable  => true,
                   require =>  [
                                 File[
                                       [
@@ -123,14 +124,14 @@ class puppet::master(
                                         '/etc/puppet/logstash.yaml'
                                       ]
                                     ],
-                                Exec["build CA $certname"],
+                                Exec["build CA ${certname}"],
                                 Concat['/etc/puppet/puppet.conf'],
                               ],
                 }
               }
-						}
-						/^16.*$/:
-						{
+            }
+            /^16.*$/:
+            {
               file { '/etc/default/puppetserver':
                 ensure  => 'present',
                 owner   => 'root',
@@ -142,8 +143,8 @@ class puppet::master(
               }
 
               fail('unimplemented')
-						}
-						default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}") }
+            }
+            default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}") }
           }
         }
         default: { fail('unsupported') }

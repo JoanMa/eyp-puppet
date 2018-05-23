@@ -20,6 +20,8 @@
 <% if(@waitforcert) -%>
   waitforcert=<%= @waitforcert %>
 <% end -%>
+<% if scope.lookupvar('::puppet::params::has_pluginsync') -%>
   pluginsync=<%= @pluginsync %>
+<% end -%>
   report =<%= @report %>
   show_diff =<%= @showdiff %>

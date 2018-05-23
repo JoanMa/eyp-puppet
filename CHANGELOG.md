@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.27
+
+* added Ubuntu 18.04 support
+
 ## 0.1.26
 
 * improved nagios check: **check_last_puppet_run** and moved to the files directory
