@@ -1,4 +1,4 @@
-class puppet::client(
+class puppet::agent(
                       $puppetmaster           = 'puppetmaster',
                       $puppetmasterport       = '8140',
                       $srcdir                 = '/usr/local/src',
@@ -17,23 +17,13 @@ class puppet::client(
                       $nagios_check_basedir   = '/usr/local/bin',
                     ) inherits puppet::params {
 
-  class { '::puppet::agent':
-    puppetmaster          => $puppetmaster,
-    puppetmasterport      => $puppetmasterport,
-    srcdir                => $srcdir,
-    waitforcert           => $waitforcert,
-    showdiff              => $showdiff,
-    package_ensure        => $package_ensure,
-    service_ensure        => $service_ensure,
-    service_enable        => $service_enable,
-    manage_service        => $manage_service,
-    manage_package        => $manage_package,
-    log                   => $log,
-    logdir                => $logdir,
-    logrotate_rotate      => $logrotate_rotate,
-    logrotate_maxsize     => $logrotate_maxsize,
-    install_nagios_checks => $install_nagios_checks,
-    nagios_check_basedir  => $nagios_check_basedir,
-  }
+  include ::puppet
+
+  Class['::puppet'] ->
+  class { '::puppet::agent::install': } ->
+  class { '::puppet::agent::config': } ~>
+  class { '::puppet::agent::service': } ->
+  Class['::puppet::agent']
+
 
 }

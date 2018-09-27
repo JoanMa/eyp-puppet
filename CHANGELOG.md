@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 0.2.0
+
+* updated to **puppet 5**
+* Added SLES12SP3 support
+* **puppet::client** renamed to **puppet::agent**
+* added **puppet::client** compatibility class that translats variables to **puppet::agent**
+
 ## 0.1.27
 
 * added Ubuntu 18.04 support

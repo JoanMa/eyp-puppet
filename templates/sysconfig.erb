@@ -1,8 +1,12 @@
+#
+# puppet managed file
+#
+
 # The puppetmaster server
-PUPPET_SERVER=<%= scope.lookupvar('puppetclient::puppetmaster') %>
+PUPPET_SERVER=<%= scope.lookupvar('puppet::agent::puppetmaster') %>
 
 # If you wish to specify the port to connect to do so here
-PUPPET_PORT=<%= scope.lookupvar('puppetclient::puppetmasterport') %>
+PUPPET_PORT=<%= scope.lookupvar('puppet::agent::puppetmasterport') %>
 
 # Where to log to. Specify syslog to send log messages to the system log.
 <% if defined?(@log) -%>

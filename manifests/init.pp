@@ -1,9 +1,9 @@
 class puppet(
-              $enable_puppetlabs_repo = $puppet::params::default_enable_puppetlabs_repo,
               $srcdir                 = '/usr/local/src',
-              $ssldir                 = $puppet::params::ssldir_default,
               $basemodulepath         = '/etc/puppet/modules:/usr/share/puppet/modules',
+              $enable_puppetlabs_repo =  true,
             ) inherits puppet::params {
+
   if($enable_puppetlabs_repo)
   {
     class { 'puppet::puppetlabsrepo':
@@ -11,6 +11,13 @@ class puppet(
       srcdir                 => $srcdir,
     }
   }
+
+  exec { "mkdir p puppet ${srcdir}":
+    command => "mkdir -p ${srcdir}",
+    creates => $srcdir,
+    path    => '/usr/sbin:/usr/bin:/sbin:/bin',
+  }
+
   concat { $puppet::params::puppetconf:
     ensure => 'present',
     owner  => 'root',
@@ -18,8 +25,8 @@ class puppet(
     mode   => '0644',
   }
 
-  concat::fragment{ 'puppetconf main':
-    target  => '/etc/puppet/puppet.conf',
+  concat::fragment { 'puppetconf main':
+    target  => $puppet::params::puppetconf,
     order   => '00',
     content => template("${module_name}/puppetconf_main.erb"),
   }

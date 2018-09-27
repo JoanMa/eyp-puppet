@@ -1,16 +1,4 @@
 [agent]
-  # The file in which puppetd stores a list of the classes
-  # associated with the retrieved configuratiion.  Can be loaded in
-  # the separate ``puppet`` executable using the ``--loadclasses``
-  # option.
-  # The default value is '$confdir/classes.txt'.
-  classfile = $vardir/classes.txt
-
-  # Where puppetd caches the local configuration.  An
-  # extension indicating the cache format is added automatically.
-  # The default value is '$confdir/localconfig'.
-  localconfig = $vardir/localconfig
-
   server = <%= @puppetmaster %>
   masterport = <%= @puppetmasterport %>
 
@@ -20,8 +8,4 @@
 <% if(@waitforcert) -%>
   waitforcert=<%= @waitforcert %>
 <% end -%>
-<% if scope.lookupvar('::puppet::params::has_pluginsync') -%>
-  pluginsync=<%= @pluginsync %>
-<% end -%>
-  report =<%= @report %>
   show_diff =<%= @showdiff %>
