@@ -13,7 +13,7 @@ class puppet::params {
       $defaultstemplate='sysconfig.erb'
       $package_provider='rpm'
 
-      $puppetconf='/etc/puppet/puppet.conf'
+      $puppetconf='/etc/puppetlabs/puppet//puppet.conf'
 
       case $::operatingsystemrelease
       {
