@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.1
+
+* added option to disable management of puppet agent's configuration
+
 ## 0.2.0
 
 * updated to **puppet 5**

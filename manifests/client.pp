@@ -15,6 +15,7 @@ class puppet::client(
                       $logrotate_maxsize      = '100M',
                       $install_nagios_checks  = true,
                       $nagios_check_basedir   = '/usr/local/bin',
+                      $manage_config_file     = true,
                     ) inherits puppet::params {
 
   class { '::puppet::agent':
