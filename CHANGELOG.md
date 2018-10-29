@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.2
+
+* added support for **SLES11SP3**
+
 ## 0.2.1
 
 * added option to disable management of puppet agent's configuration

@@ -81,7 +81,7 @@ class puppet::params {
         {
           case $::operatingsystemrelease
           {
-            '12.3':
+            /^1[12].3$/:
             {
               #rpm -Uvh https://yum.puppet.com/puppet5/puppet5-release-sles-12.noarch.rpm
               #zypper install puppet-agent
