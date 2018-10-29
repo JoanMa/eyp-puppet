@@ -75,16 +75,21 @@ class puppet::params {
 
       $puppetconf='/etc/puppetlabs/puppet/puppet.conf'
 
+      #rpm -Uvh https://yum.puppet.com/puppet5/puppet5-release-sles-12.noarch.rpm
+      #zypper install puppet-agent
+      
       case $::operatingsystem
       {
         'SLES':
         {
           case $::operatingsystemrelease
           {
-            /^1[12].3$/:
+            '11.3':
             {
-              #rpm -Uvh https://yum.puppet.com/puppet5/puppet5-release-sles-12.noarch.rpm
-              #zypper install puppet-agent
+              $puppetlabs_repo='https://yum.puppet.com/puppet5/puppet5-release-sles-11.noarch.rpm'
+            }
+            '12.3':
+            {
               $puppetlabs_repo='https://yum.puppet.com/puppet5/puppet5-release-sles-12.noarch.rpm'
             }
             default: { fail("Unsupported SLES version! - ${::operatingsystemrelease}")  }
