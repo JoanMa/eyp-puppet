@@ -88,7 +88,7 @@ class puppet::params {
               $manage_package_default=false
               $puppetlabs_repo='https://yum.puppet.com/puppet5/puppet5-release-sles-11.noarch.rpm'
             }
-            '12.3':
+            /^12.[34]/:
             {
               $manage_package_default=true
               $puppetlabs_repo='https://yum.puppet.com/puppet5/puppet5-release-sles-12.noarch.rpm'
