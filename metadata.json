@@ -1,6 +1,6 @@
 {
   "name": "eyp-puppet",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "author": "eyp",
   "summary": "puppet client management",
   "license": "Apache-2.0",
@@ -45,7 +45,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 3.8.0"
+      "version_requirement": ">= 4.0.0"
     }
   ]
 }

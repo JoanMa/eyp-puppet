@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.3.0
+
+* **INCOMPATIBLE CHANGE**: Dropped **puppet::client**
+* environment variable for puppet agent
+
 ## 0.2.3
 
 * added support for **SLES11SP4**

@@ -18,16 +18,4 @@ class puppet(
     path    => '/usr/sbin:/usr/bin:/sbin:/bin',
   }
 
-  concat { $puppet::params::puppetconf:
-    ensure => 'present',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-  }
-
-  concat::fragment { 'puppetconf main':
-    target  => $puppet::params::puppetconf,
-    order   => '00',
-    content => template("${module_name}/puppetconf_main.erb"),
-  }
 }
