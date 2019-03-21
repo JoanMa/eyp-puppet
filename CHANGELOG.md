@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.1
+
+* bugfix
+
 ## 0.3.0
 
 * environment variable for puppet agent
