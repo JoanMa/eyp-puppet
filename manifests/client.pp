@@ -19,7 +19,7 @@ class puppet::client(
                       $puppetenv              = undef,
                     ) inherits puppet::params {
 
-  class puppet::agent {
+  class { 'puppet::agent':
     puppetmaster           => $puppetmaster,
     puppetmasterport       => $puppetmasterport,
     srcdir                 => $srcdir,
