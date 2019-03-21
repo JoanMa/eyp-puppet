@@ -26,7 +26,7 @@ class puppet::client(
     waitforcert            => $waitforcert,
     showdiff               => $showdiff,
     package_ensure         => $package_ensure,
-    service_ensure         => $service_ensure.
+    service_ensure         => $service_ensure,
     service_enable         => $service_enable,
     manage_service         => $manage_service,
     manage_package         => $manage_package,
