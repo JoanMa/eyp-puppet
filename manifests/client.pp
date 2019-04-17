@@ -16,8 +16,11 @@ class puppet::client(
                       $install_nagios_checks  = true,
                       $nagios_check_basedir   = '/usr/local/bin',
                       $manage_config_file     = true,
-                      $puppetenv              = undef,
                     ) inherits puppet::params {
+
+  #
+  # puppet 3.8 compatibility
+  #
 
   class { 'puppet::agent':
     puppetmaster          => $puppetmaster,
@@ -37,7 +40,6 @@ class puppet::client(
     install_nagios_checks => $install_nagios_checks,
     nagios_check_basedir  => $nagios_check_basedir,
     manage_config_file    => $manage_config_file,
-    puppetenv             => $puppetenv,
   }
 
 }

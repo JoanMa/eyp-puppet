@@ -6,7 +6,10 @@
   logdir = <%= @logdir %>
   rundir = /var/run/puppet
 
-<% if(@waitforcert) -%>
+  show_diff =<%= @showdiff %>
+<% if defined?(@waitforcert) -%>
   waitforcert=<%= @waitforcert %>
 <% end -%>
-  show_diff =<%= @showdiff %>
+<% if defined?(@runinterval) -%>
+  runinterval=<%= @runinterval %>
+<% end -%>

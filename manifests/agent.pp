@@ -17,6 +17,7 @@ class puppet::agent(
                       $nagios_check_basedir   = '/usr/local/bin',
                       $manage_config_file     = true,
                       $puppetenv              = undef,
+                      $runinterval            = undef,
                     ) inherits puppet::params {
 
   include ::puppet
