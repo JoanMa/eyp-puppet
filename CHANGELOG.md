@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.3
+
+* added **noop** to **puppet::agent**
+
 ## 0.3.2
 
 * added runinterval setting for **puppet::agent**

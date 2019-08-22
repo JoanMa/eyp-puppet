@@ -13,3 +13,6 @@
 <% if defined?(@runinterval) -%>
   runinterval=<%= @runinterval %>
 <% end -%>
+<% if @no_op -%>
+  noop=true
+<% end -%>

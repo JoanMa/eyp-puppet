@@ -1,3 +1,6 @@
+#
+# DEPRECATED - TO BE REMOVED - USE puppet::agent INSTEAD
+#
 class puppet::client(
                       $puppetmaster           = 'puppetmaster',
                       $puppetmasterport       = '8140',
