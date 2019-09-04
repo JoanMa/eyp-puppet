@@ -1,6 +1,6 @@
 {
   "name": "eyp-puppet",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "eyp",
   "summary": "puppet client management",
   "license": "Apache-2.0",

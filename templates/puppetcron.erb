@@ -1,0 +1,8 @@
+/opt/puppetlabs/bin/puppet agent --test<% -%>
+  <%- if @no_op -%>
+  --noop<% -%>
+  <%- else -%>
+  --no-noop<% -%>
+  <%- end -%>
+  --server <%= @server -%>
+  --masterport=<%= @masterport -%>

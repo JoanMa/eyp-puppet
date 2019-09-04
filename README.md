@@ -13,7 +13,7 @@
 
 ## Overview
 
-puppet client management
+puppet agent management
 
 ## Module Description
 
@@ -46,8 +46,15 @@ class { 'puppet::agent':
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+### multiple agents
+
+To be able to have multiple agents we can use a cronjobs:
+
+```
+puppet::agent::cron { 'puppet.systemadmin.es':
+  masterport => '8140',
+}
+```
 
 ## Reference
 

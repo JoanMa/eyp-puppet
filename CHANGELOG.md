@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.4
+
+* added **puppet::agent::cron**
+
 ## 0.3.3
 
 * added **noop** to **puppet::agent**
