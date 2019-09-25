@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.6
+
+* bugfix for **Debian 10**/**Rapbian 10**
+
 ## 0.3.5
 
 * added support for **Debian 10**

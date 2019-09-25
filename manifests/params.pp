@@ -2,12 +2,13 @@ class puppet::params {
 
   $puppetlabs_package='puppet5-release'
   $agent_service_name='puppet'
-  $agent_package_name='puppet-agent'
 
   case $::osfamily
   {
     'redhat':
     {
+      $agent_package_name='puppet-agent'
+
       $manage_package_default=true
       $defaultsfile='/etc/sysconfig/puppet'
       $defaultstemplate='sysconfig.erb'
@@ -45,25 +46,29 @@ class puppet::params {
       {
         'Ubuntu':
         {
-        case $::operatingsystemrelease
-        {
-          /^14.*$/:
+          $agent_package_name='puppet-agent'
+
+          case $::operatingsystemrelease
           {
-            $puppetlabs_repo='https://apt.puppetlabs.com/puppet5-release-trusty.deb'
-          }
-          /^16.*$/:
-          {
-            $puppetlabs_repo='https://apt.puppetlabs.com/puppet5-release-xenial.deb'
-          }
-          /^18.*$/:
-          {
-            $puppetlabs_repo=undef
-          }
-          default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
+            /^14.*$/:
+            {
+              $puppetlabs_repo='https://apt.puppetlabs.com/puppet5-release-trusty.deb'
+            }
+            /^16.*$/:
+            {
+              $puppetlabs_repo='https://apt.puppetlabs.com/puppet5-release-xenial.deb'
+            }
+            /^18.*$/:
+            {
+              $puppetlabs_repo=undef
+            }
+            default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
         }
         'Debian':
         {
+          $agent_package_name='puppet'
+
           case $::operatingsystemrelease
           {
             /^10.*$/:
