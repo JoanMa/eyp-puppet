@@ -40,13 +40,13 @@ class puppet::params {
       $defaultstemplate='defaultpuppet.erb'
       $package_provider='dpkg'
 
-      $puppetconf='/etc/puppetlabs/puppet/puppet.conf'
 
       case $::operatingsystem
       {
         'Ubuntu':
         {
           $agent_package_name='puppet-agent'
+          $puppetconf='/etc/puppetlabs/puppet/puppet.conf'
 
           case $::operatingsystemrelease
           {
@@ -68,6 +68,7 @@ class puppet::params {
         'Debian':
         {
           $agent_package_name='puppet'
+          $puppetconf='/etc/puppet/puppet.conf'
 
           case $::operatingsystemrelease
           {
