@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.5
+
+* added support for **Debian 10**
+
 ## 0.3.4
 
 * added **puppet::agent::cron**
