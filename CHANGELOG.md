@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.3.7
+## 0.3.8
 
 * bugfix for **Debian 10**/**Rapbian 10**
 
