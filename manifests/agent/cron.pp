@@ -1,6 +1,6 @@
 define puppet::agent::cron(
                             $server     = $name,
-                            $ensure     = 'present', # @param cron_ensure Whether the cronjob should be present or not. (default: present)
+                            $ensure     = 'present',
                             $hour       = '*',
                             $minute     = '*/30',
                             $month      = undef,

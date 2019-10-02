@@ -38,6 +38,10 @@
       "operatingsystemrelease": [ "14.04", "16.04", "18.04" ]
     },
     {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [ "10" ]
+    },
+    {
       "operatingsystem": "SLES",
       "operatingsystemrelease": [ "11.3", "12.3", "12.4" ]
     }
