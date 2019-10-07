@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.9
+
+* Added ssldir option to **puppet::agent::cron**
+
 ## 0.3.8
 
 * bugfix for **Debian 10**/**Rapbian 10**

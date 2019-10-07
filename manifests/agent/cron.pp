@@ -8,6 +8,7 @@ define puppet::agent::cron(
                             $weekday    = undef,
                             $masterport = '8140',
                             $no_op      = false,
+                            $ssldir     = undef,
                           ) {
 
   cron { "cron puppet ${server} ${masterport}":

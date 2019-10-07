@@ -6,3 +6,6 @@
   <%- end -%>
   --server <%= @server -%>
   --masterport=<%= @masterport -%>
+  <%- if defined?(@ssldir) -%>
+  --ssldir=<%= @ssldir %>
+  <%- end -%>
