@@ -9,7 +9,8 @@ class puppet::agent::install inherits puppet::agent {
     include ::puppet::puppetlabsrepo
 
     package { $puppet::params::agent_package_name:
-      ensure => $puppet::agent::package_ensure,
+      ensure  => $puppet::agent::package_ensure,
+      require => Class['::puppet::puppetlabsrepo'],
     }
   }
 

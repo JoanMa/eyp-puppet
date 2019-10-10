@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.10
+
+* added support for **RHEL 8**
+
 ## 0.3.9
 
 * Added ssldir option to **puppet::agent::cron**
