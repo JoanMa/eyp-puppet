@@ -2,6 +2,8 @@
 # puppet managed file
 # snmpd compatible check
 
+PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/opt/puppetlabs/bin"
+
 PUPPETBIN=$(which puppet 2>/dev/null)
 
 if [ -z "${PUPPETBIN}" ];
@@ -15,9 +17,11 @@ PUPPET_VER="$(${PUPPETBIN} --version 2>/dev/null)"
 if [[ $PUPPET_VER = 3* ]];
 then
   LAST_RUN_FILE='/var/lib/puppet/state/last_run_summary.yaml'
+  LAST_RUN_REPORT='/var/lib/puppet/state/last_run_report.yaml'
 elif [[ $PUPPET_VER = 5* ]];
 then
   LAST_RUN_FILE='/opt/puppetlabs/puppet/cache/state/last_run_summary.yaml'
+  LAST_RUN_REPORT='/opt/puppetlabs/puppet/cache/state/last_run_report.yaml'
 else
   exit 2
 fi
@@ -28,7 +32,7 @@ then
 	exit 2
 fi
 
-if [ ! -e "${LAST_RUN_FILE}" ];
+if [ ! -e "${LAST_RUN_REPORT}" ];
 then
 	# last_run_report.yaml does not exists
 	exit 2
@@ -51,7 +55,7 @@ fi
 #       message: "Finished catalog run in 7.96 seconds"
 #
 
-grep "Using cached catalog" ${LAST_RUN_FILE} >/dev/null 2>&1
+grep "Using cached catalog" ${LAST_RUN_REPORT} >/dev/null 2>&1
 if [ "$?" -eq 0 ];
 then
   # server using cached catalog
@@ -63,7 +67,7 @@ fi
 #       message: "Not using cache on failed catalog"
 #       message: "Could not retrieve catalog; skipping run"
 #
-grep "Could not retrieve catalog from remote server" ${LAST_RUN_FILE} >/dev/null 2>&1
+grep "Could not retrieve catalog from remote server" ${LAST_RUN_REPORT} >/dev/null 2>&1
 if [ "$?" -eq 0 ];
 then
   # could not retrieve catalog from remote server

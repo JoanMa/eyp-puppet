@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## 0.3.11
+## 0.3.12
 
+* Improved **check_last_puppet_run**
 * Added snmpd compatible last run check
 
 ## 0.3.10
