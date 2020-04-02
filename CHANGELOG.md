@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.11
+
+* Added snmpd compatible last run check
+
 ## 0.3.10
 
 * added support for **RHEL 8**
