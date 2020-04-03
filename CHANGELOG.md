@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.3.13
+
+* Added resource report to snmpd's puppetlr check
+* Improved **check_last_puppet_run** performance data report
+
 ## 0.3.12
 
 * Improved **check_last_puppet_run**

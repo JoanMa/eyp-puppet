@@ -50,7 +50,7 @@ then
 	exit 2
 fi
 
-PERFDATA="$PERFDATA $(grep resources: ${LAST_RUN_FILE} -A7 | grep -v resources: | paste '-sd;')"
+PERFDATA="$PERFDATA $(grep resources: ${LAST_RUN_FILE} -A7 | grep -v resources: | paste '-sd;' | sed -e 's/: /=/g' -e 's/^[^a-zA-Z]*//' -e 's/[ \t]+/ /g')"
 
 #
 # outputs
@@ -61,10 +61,10 @@ PERFDATA="$PERFDATA $(grep resources: ${LAST_RUN_FILE} -A7 | grep -v resources: 
 #       message: "Finished catalog run in 7.96 seconds"
 #
 
-grep "Using cached catalog" ${LAST_RUN_REPORT} >/dev/null 2>&1
+grep "Using cached catalog" "${LAST_RUN_REPORT}" >/dev/null 2>&1
 if [ "$?" -eq 0 ];
 then
-  echo "CRITICAL - server using cached catalog |$PERFDATA"
+  echo "CRITICAL - server using cached catalog |${PERFDATA}"
   exit 2
 fi
 
@@ -76,11 +76,21 @@ fi
 grep "Could not retrieve catalog from remote server" ${LAST_RUN_REPORT} >/dev/null 2>&1
 if [ "$?" -eq 0 ];
 then
-  echo "CRITICAL - could not retrieve catalog from remote server |$PERFDATA"
+  echo "CRITICAL - could not retrieve catalog from remote server |${PERFDATA}"
   exit 2
 fi
 
-DIFF_LAST_RUN=$(/usr/local/bin/puppetlr 2>/dev/null)
+LAST_RUN=$(grep last_run "${LAST_RUN_FILE}" 2>/dev/null | awk '{ print $NF }')
+
+if [ -z "$LAST_RUN" ];
+then
+	echo "CRITICAL - error getting data from last_run_summary.yaml"
+	exit 2
+fi
+
+NOW=$(date +%s)
+
+DIFF_LAST_RUN=$(($NOW-$LAST_RUN))
 
 if [ "$?" -ne 0 ];
 then
@@ -94,33 +104,33 @@ then
   exit 2
 fi
 
-PERFDATA="${PERFDATA}; difflastrun=$DIFF_LAST_RUN;"
+PERFDATA="${PERFDATA}; difflastrun=${DIFF_LAST_RUN};"
 
-if [ $DIFF_LAST_RUN -ge $MAXDIFF ];
+if [ "${DIFF_LAST_RUN}" -ge "${MAXDIFF}" ];
 then
-	echo "CRITICAL - last run: $DIFF_LAST_RUN seconds ago |$PERFDATA"
+	echo "CRITICAL - last run: ${DIFF_LAST_RUN} seconds ago |${PERFDATA}"
 	exit 2
 fi
 
-if [ $DIFF_LAST_RUN -ge $WARNDIFF ];
+if [ "${DIFF_LAST_RUN}" -ge "${WARNDIFF}" ];
 then
-  echo "WARNING - last run: $DIFF_LAST_RUN seconds ago |$PERFDATA"
+  echo "WARNING - last run: ${DIFF_LAST_RUN} seconds ago |${PERFDATA}"
   exit 1
 fi
 
 # # grep -i catalo /var/lib/puppet/state/last_run_report.yaml
 #       message: "Caching catalog for ar-mgmt-svn01.lifecapnet.com"
 #       message: "Finished catalog run in 10.89 seconds"
-grep "Finished catalog run" ${LAST_RUN_REPORT} >/dev/null 2>&1
+grep "Finished catalog run" "${LAST_RUN_REPORT}" >/dev/null 2>&1
 if [ "$?" -eq 0 ];
 then
-  echo "OK - last run: $DIFF_LAST_RUN seconds ago |$PERFDATA"
+  echo "OK - last run: ${DIFF_LAST_RUN} seconds ago |${PERFDATA}"
   exit 0
 else
-  grep "Applied catalog in " ${LAST_RUN_REPORT} >/dev/null 2>&1
+  grep "Applied catalog in " "${LAST_RUN_REPORT}" >/dev/null 2>&1
   if [ "$?" -eq 0 ];
   then
-    echo "OK - last run: $DIFF_LAST_RUN seconds ago |$PERFDATA"
+    echo "OK - last run: ${DIFF_LAST_RUN} seconds ago |${PERFDATA}"
     exit 0
   else
     echo "CRITICAL - puppet agent does not report to have finished to apply the catalog |$PERFDATA"

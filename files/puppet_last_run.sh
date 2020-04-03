@@ -38,7 +38,7 @@ then
 	exit 2
 fi
 
-LAST_RUN=$(grep last_run ${LAST_RUN_FILE} | awk '{ print $NF }' 2>/dev/null)
+LAST_RUN=$(grep last_run ${LAST_RUN_FILE} 2>/dev/null | awk '{ print $NF }')
 
 if [ -z "$LAST_RUN" ];
 then
@@ -77,6 +77,7 @@ fi
 NOW=$(date +%s)
 
 DIFF_LAST_RUN=$(($NOW-$LAST_RUN))
+RESOURCES="$(grep resources: ${LAST_RUN_FILE} -A7 | grep -v resources: | paste '-sd;' | sed -e 's/: /=/g' -e 's/^[^a-zA-Z]*//' -e 's/[ \t]+/ /g')"
 
-echo "${DIFF_LAST_RUN}"
+echo "${RESOURCES}; difflastrun=${DIFF_LAST_RUN};"
 exit 0
