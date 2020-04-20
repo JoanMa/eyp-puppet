@@ -49,25 +49,28 @@ class puppet::params {
       {
         'Ubuntu':
         {
-          $agent_package_name='puppet-agent'
           $puppetconf='/etc/puppetlabs/puppet/puppet.conf'
 
           case $::operatingsystemrelease
           {
             /^14.*$/:
             {
+              $agent_package_name='puppet-agent'
               $puppetlabs_repo='https://apt.puppetlabs.com/puppet5-release-trusty.deb'
             }
             /^16.*$/:
             {
+              $agent_package_name='puppet-agent'
               $puppetlabs_repo='https://apt.puppetlabs.com/puppet5-release-xenial.deb'
             }
             /^18.*$/:
             {
+              $agent_package_name='puppet-agent'
               $puppetlabs_repo=undef
             }
             /^20.*$/:
             {
+              $agent_package_name='puppet'
               $puppetlabs_repo=undef
             }
             default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }

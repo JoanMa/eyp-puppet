@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.3.15
+## 0.3.16
 
 * added support for **Ubuntu 20.04**
 
