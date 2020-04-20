@@ -1,17 +1,27 @@
 define puppet::agent::cron(
-                            $server     = $name,
-                            $ensure     = 'present',
-                            $hour       = '*',
-                            $minute     = '*/30',
-                            $month      = undef,
-                            $monthday   = undef,
-                            $weekday    = undef,
-                            $masterport = '8140',
-                            $no_op      = false,
-                            $ssldir     = undef,
+                            $server      = $name,
+                            $ensure      = 'present',
+                            $hour        = '*',
+                            $minute      = '*/30',
+                            $month       = undef,
+                            $monthday    = undef,
+                            $weekday     = undef,
+                            $masterport  = '8140',
+                            $no_op       = false,
+                            $ssldir      = undef,
+                            $description = undef,
                           ) {
 
-  cron { "cron puppet ${server} ${masterport}":
+  if defined($description)
+  {
+    $cron_description = $description
+  }
+  else
+  {
+    $cron_description = "cron puppet ${server} ${masterport}"
+  }
+
+  cron { $cron_description:
     ensure   => $ensure,
     command  => template("${module_name}/puppetcron.erb"),
     user     => 'root',

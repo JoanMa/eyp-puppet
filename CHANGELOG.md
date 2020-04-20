@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 0.3.15
+
+* added support for **Ubuntu 20.04**
+
+## 0.3.14
+
+* added description for cron-based and agent base agents
+
 ## 0.3.13
 
 * Added resource report to snmpd's puppetlr check

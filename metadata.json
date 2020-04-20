@@ -1,6 +1,6 @@
 {
   "name": "eyp-puppet",
-  "version": "0.3.13",
+  "version": "0.3.15",
   "author": "eyp",
   "summary": "puppet client management",
   "license": "Apache-2.0",
@@ -36,7 +36,7 @@
     },
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ "14.04", "16.04", "18.04" ]
+      "operatingsystemrelease": [ "14.04", "16.04", "18.04", "20.04" ]
     },
     {
       "operatingsystem": "Debian",

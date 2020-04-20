@@ -20,6 +20,7 @@ class puppet::agent(
                       $puppetenv             = undef,
                       $runinterval           = undef,
                       $no_op                 = false,
+                      $description           = undef,
                     ) inherits puppet::params {
 
   include ::puppet

@@ -66,6 +66,10 @@ class puppet::params {
             {
               $puppetlabs_repo=undef
             }
+            /^20.*$/:
+            {
+              $puppetlabs_repo=undef
+            }
             default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
         }
