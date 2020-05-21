@@ -56,7 +56,7 @@ PERFDATA="$PERFDATA $(grep resources: ${LAST_RUN_FILE} -A7 | grep -v resources: 
 # outputs
 #
 # # grep -i catalo /var/lib/puppet/state/last_run_report.yaml
-#       message: "Could not retrieve catalog from remote server: Error 400 on SERVER: Puppet::Parser::AST::Resource failed with error ArgumentError: Could not find declared class sssd::monit at /etc/puppet/manifests/site.pp:919 on node centos7.vm"
+#       message: "Could not retrieve catalog from remote server: Error 400 on SERVER: Puppet::Parser::AST::Resource failed with error ArgumentError: Could not find declared class sssd::monit at /etc/puppet/manifests/site.pp:919 on node testvm.systemadmin.es"
 #       message: "Using cached catalog"
 #       message: "Finished catalog run in 7.96 seconds"
 #
@@ -69,7 +69,7 @@ then
 fi
 
 # # grep -i catalo /var/lib/puppet/state/last_run_report.yaml
-#       message: "Could not retrieve catalog from remote server: Error 400 on SERVER: Puppet::Parser::AST::Resource failed with error ArgumentError: Invalid resource type pam::securetty at /etc/puppet/manifests/site.pp:356 on node ar-tst2-ebsdb01.lifecapnet.com"
+#       message: "Could not retrieve catalog from remote server: Error 400 on SERVER: Puppet::Parser::AST::Resource failed with error ArgumentError: Invalid resource type pam::securetty at /etc/puppet/manifests/site.pp:356 on node demovm.systemadmin.es"
 #       message: "Not using cache on failed catalog"
 #       message: "Could not retrieve catalog; skipping run"
 #
@@ -119,7 +119,7 @@ then
 fi
 
 # # grep -i catalo /var/lib/puppet/state/last_run_report.yaml
-#       message: "Caching catalog for ar-mgmt-svn01.lifecapnet.com"
+#       message: "Caching catalog for demovm.systemadmin.es"
 #       message: "Finished catalog run in 10.89 seconds"
 grep "Finished catalog run" "${LAST_RUN_REPORT}" >/dev/null 2>&1
 if [ "$?" -eq 0 ];
