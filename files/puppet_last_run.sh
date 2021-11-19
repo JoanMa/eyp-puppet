@@ -23,19 +23,19 @@ then
   LAST_RUN_FILE='/opt/puppetlabs/puppet/cache/state/last_run_summary.yaml'
   LAST_RUN_REPORT='/opt/puppetlabs/puppet/cache/state/last_run_report.yaml'
 else
-  exit 2
+  exit 3
 fi
 
 if [ ! -e "${LAST_RUN_FILE}" ];
 then
 	# last_run_summary.yaml does not exists
-	exit 2
+	exit 4
 fi
 
 if [ ! -e "${LAST_RUN_REPORT}" ];
 then
 	# last_run_report.yaml does not exists
-	exit 2
+	exit 5
 fi
 
 LAST_RUN=$(grep last_run ${LAST_RUN_FILE} 2>/dev/null | awk '{ print $NF }')
@@ -43,7 +43,7 @@ LAST_RUN=$(grep last_run ${LAST_RUN_FILE} 2>/dev/null | awk '{ print $NF }')
 if [ -z "$LAST_RUN" ];
 then
 	# error getting data from last_run_summary.yaml
-	exit 2
+	exit 6
 fi
 
 #
@@ -59,7 +59,7 @@ grep "Using cached catalog" ${LAST_RUN_REPORT} >/dev/null 2>&1
 if [ "$?" -eq 0 ];
 then
   # server using cached catalog
-  exit 2
+  exit 7
 fi
 
 # # grep -i catalo /var/lib/puppet/state/last_run_report.yaml
@@ -71,7 +71,16 @@ grep "Could not retrieve catalog from remote server" ${LAST_RUN_REPORT} >/dev/nu
 if [ "$?" -eq 0 ];
 then
   # could not retrieve catalog from remote server
-  exit 2
+  exit 8
+fi
+
+#Notice: Skipping run of Puppet configuration client; administratively disabled (Reason: 'reason not specified');
+#Use 'puppet agent --enable' to re-enable.
+tail -n 2 /var/log/puppet/puppet.log | grep disable >/dev/null 2>&1
+if [ "$?" -eq 0 ];
+then
+  # minion is disabled
+  exit 9
 fi
 
 NOW=$(date +%s)

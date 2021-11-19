@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.3.17
+
+* added different error codes for each error on puppet_last_run.sh
+* added chek to review if puppet agent was manualy disabled on puppet_last_run.sh
+
 ## 0.3.16
 
 * added support for **Ubuntu 20.04**
