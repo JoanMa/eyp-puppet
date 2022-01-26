@@ -83,6 +83,24 @@ then
   exit 9
 fi
 
+# Puppet (err): Failed to apply catalog: no parameter
+# Puppet catalog not being applied
+tail -n 2 /var/log/puppet/puppet.log | grep "Failed to apply catalog" >/dev/null 2>&1
+if [ "$?" -eq 0 ];
+then
+  # Catalog is not being applied
+  exit 10
+fi
+
+# Puppet (err): Failed to apply catalog: no parameter
+# Puppet catalog not being applied
+tail -n 2 /var/log/puppet/puppet.log | grep "Failed to apply catalog" >/dev/null 2>&1
+if [ "$?" -eq 0 ];
+then
+  # Catalog is not being applied
+  exit 10
+fi
+
 NOW=$(date +%s)
 
 DIFF_LAST_RUN=$(($NOW-$LAST_RUN))
