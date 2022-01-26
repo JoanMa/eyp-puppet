@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.3.18
+* added error message case for "Failed to apply catalog"
+
 ## 0.3.17
 
 * added different error codes for each error on puppet_last_run.sh
